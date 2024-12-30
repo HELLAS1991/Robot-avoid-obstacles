@@ -2,100 +2,100 @@
 //ΠΩΣ ΝΑ ΑΠΟΦΥΓΕΙ ΤΟ ΟΧΗΜΑ ΕΜΠΟΔΙΑ
 // ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ - ΑΡΧΙΚΟΠΟΙΗΣΗ ΤΙΜΩΝ
 
-#include <Servo.h>  //Ο ΜΕΤΑΓΛΩΤΙΣΤΗΣ C++ ΘΑ ΛΑΒΕΙ ΥΠΟΨΗ ΟΛΑ ΤΑ ΑΡΧΕΙΑ ΠΟΥ ΑΦΟΡΟΥΝ ΤΟΥΣ ΚΙΝΗΤΗΡΕΣ SERVO//
-Servo Myservo; // ΟΝΟΜΑΤΟΛΟΓΙΑ ΤΟΥ  SERVO ΚΙΝΗΤΗΡΑ//
-const int trig = 11; //ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ ΑΙΣΘΗΤΗΡΑ ΥΠΕΡΗΧΩΝ HC-SR04//
+#include <Servo.h>  //THE C++ COMPILER WILL TAKE INTO ACCOUNT ALL RECORDS RELATED TO SERVO ENGINES//
+Servo Myservo; // NAMED SERVO ENGINE//
+const int trig = 11; //VARIABLE ULTRASONIC SENSOR DECLARATION HC-SR04//
 const int echo = 10;
-float timing = 0.0; //ΑΡΧΙΚΗ ΤΙΜΗ 0//
-float dis = 0.0;  //ΑΡΧΙΚΗ ΤΙΜΗ 0//
-const int buzzer = 12; //ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ ΗΧΕΙΟΥ//
-// ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ 1ΟΥ ΚΙΝΗΤΗΡΑ//
+float timing = 0.0; //STARTING PRICE 0//
+float dis = 0.0;  //STARTING PRICE 0//
+const int buzzer = 12; //VARIABLE BUZZER//
+// VARIABLE 1ST ENGINE//
 int in1 = 7;
 int in2 = 6;
-// ΔΗΛΩΣΗ ΜΕΤΑΒΛΗΤΩΝ 2ΟΥ ΚΙΝΗΤΗΡΑ//
+// VARIABLE 2ST ENGINE//
 int in3 = 5;
 int in4 = 4;
 
 
-void setup()      //ΚΩΔΙΚΑΣ ΠΟΥ ΘΑ ΕΚΤΕΛΕΣΤΕΙ ΜΙΑ ΦΟΡΑ//
+void setup()      //CODE THAT WILL CHECK ONCE//
 {
-  // ΔΗΛΩΣΗ ΤΑ PIN ΤΩΝ ΚΙΝΗΤΗΡΩΝ ΩΣ ΕΞΟΔΟΙ//
+  // VARIABLE ENGINE΄S PINS 0UTPUT/
   pinMode (in1, OUTPUT);
   pinMode (in2, OUTPUT);   
   pinMode (in3, OUTPUT);
   pinMode (in4, OUTPUT);
-  pinMode(trig, OUTPUT); // ΔΗΛΩΣΗ ΤΟ PIN ΤRIG ΤΟΥ HC-SR04 ΩΣ ΕΞΟΔΟ//
-  pinMode(echo, INPUT); // ΔΗΛΩΣΗ ΤΟ PIN ECHO ΤΟΥ HC-SR04 ΩΣ ΕΙΣΟΔΟ ΓΙΑ ΤΗ ΛΗΨΗ ΤΩΝ ΜΙΚΡΟΚΥΜΑΤΙΚΩΝ ΣΗΜΑΤΩΝ //   
-  pinMode(buzzer, OUTPUT);// ΔΗΛΩΣΗ ΤΟΥ ΗΧΕΙΟΥ ΩΣ ΕΞΟΔΟ//
-  digitalWrite(trig, LOW);//ΟΧΙ ΕΚΠΟΜΠΗ ΜΙΚΡΟΚΥΜΑΤΙΚΩΝ ΣΗΜΑΤΩΝ//
-  digitalWrite(buzzer, LOW);//ΑΡΧΙΚΗ ΤΙΜΗ 0,ΧΩΡΙΣ ΗΧΟ//
-  Myservo.attach(9);//ΕΠΙΣΥΝΑΨΗ ΤΟΥ ΚΙΝΗΤΗΡΑ SERVO ΣΤΗΝ ΑΚΙΔΑ 9//
+  pinMode(trig, OUTPUT); // VARIABLE PIN ΤRIG ΤΟΥ HC-SR04 OUTPUT//
+  pinMode(echo, INPUT); // VARIABLE PIN ECHO ΤΟΥ HC-SR04 INPUT TO RECEIVE MICROWAVE SIGNALS //   
+  pinMode(buzzer, OUTPUT);// VARIABLE BUZZER OUTPUT//
+  digitalWrite(trig, LOW);//NO EMISSION MICROWAVE SIGNALS//
+  digitalWrite(buzzer, LOW);//STARTING PRICE 0,NO TONE//
+  Myservo.attach(9);//ATTACH SERVO ENGINE PIN 9//
    
-  Serial.begin(9600);
+  Serial.begin(9600); STARTING PRICE
 }
-long dura, distance; //Η ΔΙΑΡΚΕΙΑ ΚΙΝΗΣΗΣ ΕΞΑΡΤΑΤΑΙ ΤΗΣ ΑΠΟΣΤΑΣΗΣ//
+long dura, distance; //THE DURATION OF MOVEMENT DEPENDS ON THE DISTANCE//
 
-void loop()        //ΚΩΔΙΚΑΣ ΠΟΥ ΘΑ ΕΠΑΝΑΛΑΜΒΑΝΕΤΑΙ//
+void loop()        //CODE THAT WILL REPEAT//
 {     
-  digitalWrite(trig, LOW);  //ΟΧΙ ΕΚΠΟΜΠΗ ΜΙΚΡΟΚΥΜΑΤΙΚΩΝ ΣΗΜΑΤΩΝ//
-  delay(200);              //ΑΝΑΜΟΝΗ ΓΙΑ 0,2 SECONDS//
-  digitalWrite(trig, HIGH);//ΕΚΠΟΜΠΗ ΜΙΚΡΟΚΥΜΑΤΙΚΩΝ ΣΗΜΑΤΩΝ//
-  delay(100);              //ΑΝΑΜΟΝΗ ΓΙΑ 0,1 SECONDS//
-  digitalWrite(trig, LOW);  //ΠΑΥΣΓΗ ΕΚΠΟΜΠΗΣ ΜΙΚΡΟΚΥΜΑΤΙΚΩΝ ΣΗΜΑΤΩΝ//
-  timing = pulseIn(echo, HIGH);//ΛΗΨΗ ΜΙΚΡΟΚΥΜΑΤΙΚΩΝ ΣΗΜΑΤΩΝ//
-  distance = (timing * 0.034) / 2; //ΜΕΤΡΗΣΗ ΑΠΟΣΤΑΣΗΣ
+  digitalWrite(trig, LOW);  //NO EMISSION MICROWAVE SIGNALS//
+  delay(200);              //DELAY 0,2 SECONDS//
+  digitalWrite(trig, HIGH);//EMISSION MICROWAVE SIGNALS//
+  delay(100);              //DELAY ΓΙΑ 0,1 SECONDS//
+  digitalWrite(trig, LOW);  //STOP EMISSION MICROWAVE SIGNALS//
+  timing = pulseIn(echo, HIGH);//EMISSION MICROWAVE SIGNALS//
+  distance = (timing * 0.034) / 2; //DISTANCE MEASUREMENT
   
-//ΣΥΝΘΗΚΗ ΕΚΤΥΠΩΣΗΣ//
+//PRINTING CONDITION//
 
-  Serial.print("Distance: ");//ΕΚΤΥΠΩΣΕ :ΑΠΟΣΤΑΣΗ:"  "//
-  Serial.print(distance);   //ΕΚΤΥΠΩΣ ΜΟΝΟ ΤΟΝ ΑΡΙΘΜΟ//
-  Serial.print("cm l ");    //ΕΚΤΥΠΩΣΕ :"CM  l "//
-  Serial.print(distance / 2.54);  //ΕΚΤΥΠΩΣΕ ΤΟΝ ΥΠΟΛΟΓΙΣΜΟ ΤΗΣ ΠΡΑΞΗΣ
-  Serial.println("in");         //ΕΚΤΥΠΩΣΕ ΣΕ ΑΛΛΗ ΓΡΑΜΜΗ ΤΟ "IN"//
+  Serial.print("Distance: ");//PRINT :DISTANCE:"  "//
+  Serial.print(distance);   //PRINT ONLY THE NUMBER//
+  Serial.print("cm l ");    //PRINT :"CM  l "//
+  Serial.print(distance / 2.54);  //PRINT THE RESULT
+  Serial.println("in");         //PRINT IN OTHER LINE "IN"//
   
-// ΣΥΝΘΗΚΗ ΓΙΑ ΑΠΟΦΥΓΗ ΕΜΠΟΔΙΟΥ// 
+// TREATY TO AVOID OBSTACLE// 
 
-    if (distance > 15)    //ΕΛΕΓΧΟΣ ΕΑΝ Η ΑΠΟΣΤΑΣΗ ΕΙΝΑΙ ΜΕΓΑΛΥΤΕΡΗ ΑΠΟ ΤΗΝ ΤΙΜΗ 15 ΤΟΤΕ ΚΑΝΕ ΤΟ ΠΑΡΑΚΑΤΩ// 
+    if (distance > 15)    //CHECK IF THE DISTANCE IS HIGHER THAN 15 THEN DO THIS// 
   {
-    Myservo.write(90);    //TIMH ΣΤΟ SERVO ΚΙΝΗΤΗΡΑ 90 ΜΟΙΡΕΣ//
-    digitalWrite(in3, HIGH);   // ΚΙΝΗΣΗ ΕΜΠΡΟΣ//
+    Myservo.write(90);    //VARIABLE SERVO ENGINE 90 DEGREES//
+    digitalWrite(in3, HIGH);   // MOVE FORWARD//
     digitalWrite(in4, LOW);
     digitalWrite(in2, HIGH);                                
     digitalWrite(in1, LOW);                                                       
   }
-  else if ((distance < 10)&(distance > 0))  //ΕΛΕΓΧΟΣ ΑΠΟΣΤΑΣΗΣ ΓΙΑ ΑΝΑΓΝΩΡΙΣΗ ΕΜΠΟΔΙΟΥ//
+  else if ((distance < 10)&(distance > 0))  //CHECK DISTANCE FOR OBSTACLE IDENTIFICATION//
   {
-    digitalWrite(in3, LOW);     //ΑΚΙΝΗΤΟΠΟΙΗΣΗ=STOP//              
+    digitalWrite(in3, LOW);     //STOP//              
     digitalWrite(in4, LOW);
     digitalWrite(in2, LOW);                                
     digitalWrite(in1, LOW);
-    tone(buzzer, 500);       //ΗΧΟΣ ΑΠΟ ΤΟ ΗΧΕΙΟ//
+    tone(buzzer, 500);       //TONE BUZZER//
     } else {
-  	noTone(buzzer);         //ΠΑΥΣΗ ΗΧΕΙΟΥ//
+  	noTone(buzzer);         //STOP SOUND//
   }
 
-    delay(100);         //ΑΝΑΜΟΝΗ ΓΙΑ 0,1 SECONDS//
+    delay(100);         //DELAY-STOP 0,1 SECONDS//
     
-    Myservo.write(0);  //ΣΥΝΘΗΚΗ ΓΙΑ ΣΤΡΟΦΗ ΤΟΥ SERVO ΚΙΝΗΤΗΡΑ ΔΕΞΙΑ-ΑΡΙΣΤΕΡΑ//
-    delay(500);         //ΑΝΑΜΟΝΗ ΓΙΑ 0,5 SECONDS//
-    Myservo.write(180);  //TIMH ΣΤΟ SERVO ΚΙΝΗΤΗΡΑ 180 ΜΟΙΡΕΣ//
-    delay(500);          //ΑΝΑΜΟΝΗ ΓΙΑ 0,5 SECONDS//
-    Myservo.write(90);  //TIMH ΣΤΟ SERVO ΚΙΝΗΤΗΡΑ 90 ΜΟΙΡΕΣ//
-    delay(500);            //ΑΝΑΜΟΝΗ ΓΙΑ 0,5 SECONDS//
+    Myservo.write(0);  //ΤRΕΑΤΥ ΤΟ ΤΘΡΝ  ENGINE SERVO RIGHT-LRFT//
+    delay(500);         //DELAY-STOP 0,5 SECONDS//
+    Myservo.write(180);  //VARIABLE SERVO ENGINE 180 DG//
+    delay(500);          //DELAY-STOP 0,5 SECONDS//
+    Myservo.write(90);  //VARIABLE SERVO ENGINE 90 DG//
+    delay(500);            //DELAY-STOP 0,5 SECONDS//
     
-    digitalWrite(in3, LOW); //ΣΥΝΘΗΚΗ ΓΙΑ ΤΗΝ ΚΙΝΗΣΗ ΤΟΥ ΟΧΗΜΑΤΟΣ ΠΙΣΩ//             
+    digitalWrite(in3, LOW); //TREATY MOVE BACK//             
     digitalWrite(in4, HIGH);
     digitalWrite(in2, LOW);                                
     digitalWrite(in1, HIGH);
-    delay(500);               //ΑΝΑΜΟΝΗ ΓΙΑ 0,5 SECONDS//
-    digitalWrite(in3, LOW); //ΣΥΝΘΗΚΗ ΓΙΑ ΤΗΝ ΑΚΙΝΗΤΟΠΟΙΗΣΗ=ΠΑΥΣΗ ΤΟΥ ΟΧΗΜΑΤΟΣ//               
+    delay(500);               //DELAY-STOP 0,5 SECONDS//
+    digitalWrite(in3, LOW); //TREATY TO STOP THE VEHICLE//               
     digitalWrite(in4, LOW);
     digitalWrite(in2, LOW);                                
     digitalWrite(in1, LOW);  
-    delay(100);               //ΑΝΑΜΟΝΗ ΓΙΑ 0,1 SECONDS//
-    digitalWrite(in3, HIGH);// ΣΥΝΘΗΚΗ ΓΙΑ ΤΗΝ ΚΙΝΗΣΗ ΤΟΥ ΟΧΗΜΑΤΟΣ  ΔΕΞΙΑ//     
+    delay(100);               //DELAY-STOP 0,1 SECONDS//
+    digitalWrite(in3, HIGH);// TREATY TO MOVE RIGHT//     
     digitalWrite(in4, LOW);   
     digitalWrite(in1, LOW);                                 
     digitalWrite(in2, LOW);  
-    delay(500);             //ΑΝΑΜΟΝΗ ΓΙΑ 0,5 SECONDS//
+    delay(500);             //DELAY-STOP 0,5 SECONDS//
  }
