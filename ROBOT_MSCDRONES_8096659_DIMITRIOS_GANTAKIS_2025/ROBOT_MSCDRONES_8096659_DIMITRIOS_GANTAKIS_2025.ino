@@ -27,31 +27,19 @@ void setup()      //CODE THAT WILL CHECK ONCE//
   pinMode(trig, OUTPUT); // VARIABLE PIN ΤRIG ΤΟΥ HC-SR04 OUTPUT//
   pinMode(echo, INPUT); // VARIABLE PIN ECHO ΤΟΥ HC-SR04 INPUT TO RECEIVE MICROWAVE SIGNALS //   
   pinMode(buzzer, OUTPUT);// VARIABLE BUZZER OUTPUT//
-  digitalWrite(trig, LOW);//NO EMISSION MICROWAVE SIGNALS//
-  digitalWrite(buzzer, LOW);//STARTING PRICE 0,NO TONE//
   Myservo.attach(9);//ATTACH SERVO ENGINE PIN 9//
-   
-  Serial.begin(9600); STARTING PRICE
 }
-long dura, distance; //THE DURATION OF MOVEMENT DEPENDS ON THE DISTANCE//
-
 void loop()        //CODE THAT WILL REPEAT//
-{     
+{ 
+  Serial.begin(9600); STARTING PRICE
   digitalWrite(trig, LOW);  //NO EMISSION MICROWAVE SIGNALS//
   delay(200);              //DELAY 0,2 SECONDS//
   digitalWrite(trig, HIGH);//EMISSION MICROWAVE SIGNALS//
   delay(100);              //DELAY ΓΙΑ 0,1 SECONDS//
-  digitalWrite(trig, LOW);  //STOP EMISSION MICROWAVE SIGNALS//
-  timing = pulseIn(echo, HIGH);//EMISSION MICROWAVE SIGNALS//
-  distance = (timing * 0.034) / 2; //DISTANCE MEASUREMENT
-  
-//PRINTING CONDITION//
-
-  Serial.print("Distance: ");//PRINT :DISTANCE:"  "//
-  Serial.print(distance);   //PRINT ONLY THE NUMBER//
-  Serial.print("cm l ");    //PRINT :"CM  l "//
-  Serial.print(distance / 2.54);  //PRINT THE RESULT
-  Serial.println("in");         //PRINT IN OTHER LINE "IN"//
+  duration = pulseIn(echoPin, HIGH);    //EMISSION MICROWAVE SIGNALS//
+  distance = duration / 58.2;          //DISTANCE MEASUREMENT
+  Serial.println(distance);     //PRINTING CONDITION//
+  delay(10);
   
 // TREATY TO AVOID OBSTACLE// 
 
