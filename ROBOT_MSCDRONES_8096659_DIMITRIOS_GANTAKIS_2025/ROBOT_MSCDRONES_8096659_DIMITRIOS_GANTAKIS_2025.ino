@@ -4,30 +4,26 @@
 
 #include <Servo.h>  //THE C++ COMPILER WILL TAKE INTO ACCOUNT ALL RECORDS RELATED TO SERVO ENGINES//
 Servo Myservo; // NAMED SERVO ENGINE//
-const int trig = 11; //VARIABLE ULTRASONIC SENSOR DECLARATION HC-SR04//
-const int echo = 10;
-float timing = 0.0; //STARTING PRICE 0//
-float dis = 0.0;  //STARTING PRICE 0//
-const int buzzer = 12; //VARIABLE BUZZER//
+#define trig 11 //VARIABLE ULTRASONIC SENSOR DECLARATION HC-SR04//
+#define echo = 10
 // VARIABLE 1ST ENGINE//
-int in1 = 7;
-int in2 = 6;
+#define in1 7
+#define in2 6
 // VARIABLE 2ST ENGINE//
-int in3 = 5;
-int in4 = 4;
-
+#define in3 5
+#define in4 4
 
 void setup()      //CODE THAT WILL CHECK ONCE//
 {
   // VARIABLE ENGINE΄S PINS 0UTPUT/
+  Serial.begin(9600);
   pinMode (in1, OUTPUT);
   pinMode (in2, OUTPUT);   
   pinMode (in3, OUTPUT);
   pinMode (in4, OUTPUT);
   pinMode(trig, OUTPUT); // VARIABLE PIN ΤRIG ΤΟΥ HC-SR04 OUTPUT//
   pinMode(echo, INPUT); // VARIABLE PIN ECHO ΤΟΥ HC-SR04 INPUT TO RECEIVE MICROWAVE SIGNALS //   
-  pinMode(buzzer, OUTPUT);// VARIABLE BUZZER OUTPUT//
-  Myservo.attach(9);//ATTACH SERVO ENGINE PIN 9//
+ Myservo.attach(9);//ATTACH SERVO ENGINE PIN 9//
 }
 void loop()        //CODE THAT WILL REPEAT//
 { 
@@ -36,7 +32,7 @@ void loop()        //CODE THAT WILL REPEAT//
   delay(200);              //DELAY 0,2 SECONDS//
   digitalWrite(trig, HIGH);//EMISSION MICROWAVE SIGNALS//
   delay(100);              //DELAY ΓΙΑ 0,1 SECONDS//
-  duration = pulseIn(echoPin, HIGH);    //EMISSION MICROWAVE SIGNALS//
+  duration = pulseIn(echoPin, HIGH);        // Receive Reflected Waves
   distance = duration / 58.2;          //DISTANCE MEASUREMENT
   Serial.println(distance);     //PRINTING CONDITION//
   delay(10);
@@ -57,11 +53,6 @@ void loop()        //CODE THAT WILL REPEAT//
     digitalWrite(in4, LOW);
     digitalWrite(in2, LOW);                                
     digitalWrite(in1, LOW);
-    tone(buzzer, 500);       //TONE BUZZER//
-    } else {
-  	noTone(buzzer);         //STOP SOUND//
-  }
-
     delay(100);         //DELAY-STOP 0,1 SECONDS//
     
     Myservo.write(0);  //ΤRΕΑΤΥ ΤΟ ΤΘΡΝ  ENGINE SERVO RIGHT-LRFT//
@@ -87,3 +78,4 @@ void loop()        //CODE THAT WILL REPEAT//
     digitalWrite(in2, LOW);  
     delay(500);             //DELAY-STOP 0,5 SECONDS//
  }
+}
