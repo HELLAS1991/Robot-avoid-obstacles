@@ -16,7 +16,6 @@ Servo Myservo; // NAMED SERVO ENGINE//
 void setup()      //CODE THAT WILL CHECK ONCE//
 {
   // VARIABLE ENGINE΄S PINS 0UTPUT/
-  Serial.begin(9600);
   pinMode (in1, OUTPUT);
   pinMode (in2, OUTPUT);   
   pinMode (in3, OUTPUT);
@@ -32,7 +31,7 @@ void loop()        //CODE THAT WILL REPEAT//
   delay(200);              //DELAY 0,2 SECONDS//
   digitalWrite(trig, HIGH);//EMISSION MICROWAVE SIGNALS//
   delay(100);              //DELAY ΓΙΑ 0,1 SECONDS//
-  duration = pulseIn(echoPin, HIGH);        // Receive Reflected Waves
+  duration = pulseIn(echoPin, HIGH);        // RECEIVE REFLECTED WAVES
   distance = duration / 58.2;          //DISTANCE MEASUREMENT
   Serial.println(distance);     //PRINTING CONDITION//
   delay(10);
@@ -55,7 +54,7 @@ void loop()        //CODE THAT WILL REPEAT//
     digitalWrite(in1, LOW);
     delay(100);         //DELAY-STOP 0,1 SECONDS//
     
-    Myservo.write(0);  //ΤRΕΑΤΥ ΤΟ ΤΘΡΝ  ENGINE SERVO RIGHT-LRFT//
+    Myservo.write(0);  //ΤRΕΑΤΥ ΤΟ ΤURΝ  ENGINE SERVO RIGHT-LEFT//
     delay(500);         //DELAY-STOP 0,5 SECONDS//
     Myservo.write(180);  //VARIABLE SERVO ENGINE 180 DG//
     delay(500);          //DELAY-STOP 0,5 SECONDS//
